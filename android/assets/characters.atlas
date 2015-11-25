@@ -1,0 +1,76 @@
+
+characters.png
+size: 256,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+CharCyan
+  rotate: false
+  xy: 0, 0
+  size: 253, 23
+  orig: 253, 23
+  offset: 0, 0
+  index: -1
+CharBlue
+  rotate: false
+  xy: 0, 23
+  size: 253, 23
+  orig: 253, 23
+  offset: 0, 0
+  index: -1
+CharPink
+  rotate: false
+  xy: 0, 46
+  size: 253, 23
+  orig: 253, 23
+  offset: 0, 0
+  index: -1
+CharYellow
+  rotate: false
+  xy: 0, 69
+  size: 253, 23
+  orig: 253, 23
+  offset: 0, 0
+  index: -1
+CharWhite
+  rotate: false
+  xy: 0, 92
+  size: 253, 23
+  orig: 253, 23
+  offset: 0, 0
+  index: -1
+CharCyanFace
+  rotate: false
+  xy: 0, 115
+  size: 23, 23
+  orig: 23, 23
+  offset: 0, 0
+  index: -1
+CharBlueFace
+  rotate: false
+  xy: 23, 115
+  size: 23, 23
+  orig: 23, 23
+  offset: 0, 0
+  index: -1
+CharPinkFace
+  rotate: false
+  xy: 46, 115
+  size: 23, 23
+  orig: 23, 23
+  offset: 0, 0
+  index: -1
+CharYellowFace
+  rotate: false
+  xy: 69, 115
+  size: 23, 23
+  orig: 23, 23
+  offset: 0, 0
+  index: -1
+CharWhiteFace
+  rotate: false
+  xy: 92, 115
+  size: 23, 23
+  orig: 23, 23
+  offset: 0, 0
+  index: -1
