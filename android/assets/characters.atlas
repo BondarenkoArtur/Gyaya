@@ -74,3 +74,24 @@ CharWhiteFace
   orig: 23, 23
   offset: 0, 0
   index: -1
+SlimePink
+  rotate: false
+  xy: 0, 138
+  size: 92, 23
+  orig: 92, 23
+  offset: 0, 0
+  index: -1
+SlimeGreen
+  rotate: false
+  xy: 0, 161
+  size: 92, 23
+  orig: 92, 23
+  offset: 0, 0
+  index: -1
+SlimeCyan
+  rotate: false
+  xy: 0, 184
+  size: 92, 23
+  orig: 92, 23
+  offset: 0, 0
+  index: -1

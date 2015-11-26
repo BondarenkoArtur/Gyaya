@@ -1,16 +1,12 @@
 package ga.uabart.gyaya.Sprites;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.RandomXS128;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Logger;
 import ga.uabart.gyaya.Gyaya;
 import ga.uabart.gyaya.Screens.PlayScreen;
 
@@ -136,7 +132,8 @@ public class Player extends Sprite {
         CircleShape shape = new CircleShape();
         shape.setRadius(8f / Gyaya.PPM);
         fixtureDef.filter.categoryBits = Gyaya.PLAYER_BIT;
-        fixtureDef.filter.maskBits = Gyaya.DEFAULT_BIT | Gyaya.BRICK_BIT | Gyaya.COIN_BIT;
+        fixtureDef.filter.maskBits = Gyaya.GROUND_BIT | Gyaya.BRICK_BIT | Gyaya.COIN_BIT |
+                Gyaya.OBJECT_BIT | Gyaya.ENEMY_BIT | Gyaya.ENEMY_HEAD_BIT ;
 
         fixtureDef.shape = shape;
 
