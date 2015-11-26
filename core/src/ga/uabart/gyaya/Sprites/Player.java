@@ -34,12 +34,12 @@ public class Player extends Sprite {
     private String charNameFace;
     private TextureRegion faceTexture;
 
-    public Player(World world, PlayScreen screen){
+    public Player(PlayScreen screen){
         charName = CHARS.get(MathUtils.random(0, 4));
         charNameFace = charName + "Face";
 //        Gdx.app.log("charnameface", charNameFace);
         faceTexture = new TextureRegion(screen.getAtlas().findRegion(charNameFace), 0, 0, 23, 23);
-        this.world = world;
+        world = screen.getWorld();
         currentState = State.STANDING;
         previousState = State.STANDING;
         stateTimer = 0;

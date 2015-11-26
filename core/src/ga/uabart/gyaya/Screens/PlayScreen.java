@@ -59,9 +59,9 @@
             world = new World(new Vector2(0, -10), true);
             b2dr = new Box2DDebugRenderer();
 
-            new B2WorldCreator(world, map);
+            new B2WorldCreator(this);
 
-            player = new Player(world, this);
+            player = new Player(this);
 
             hud = new Hud(gyaya.batch, player);
 
@@ -74,6 +74,14 @@
 
         public TextureAtlas getAtlas(){
             return atlas;
+        }
+
+        public TiledMap getMap(){
+            return map;
+        }
+
+        public World getWorld(){
+            return world;
         }
 
         @Override
@@ -117,10 +125,11 @@
 
             if (gameCamera.position.x < 1.2f)
                 gameCamera.position.x = 1.2f;
-            if (gameCamera.position.x > 19.8f)
-                gameCamera.position.x = 19.8f;
             if (gameCamera.position.y < 0.8f)
                 gameCamera.position.y = 0.8f;
+            //TODO: Remove hardcode. Find Camera scale and make method for counting this.
+            if (gameCamera.position.x > 19.8f)
+                gameCamera.position.x = 19.8f;
             if (gameCamera.position.y > 2.14f)
                 gameCamera.position.y = 2.14f;
 
