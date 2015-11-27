@@ -1,5 +1,6 @@
 package ga.uabart.gyaya.Tools;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
 import ga.uabart.gyaya.Gyaya;
 import ga.uabart.gyaya.Sprites.Enemy;
@@ -21,17 +22,22 @@ public class WorldContactListener implements ContactListener {
                     ((Enemy)fixB.getUserData()).hitOnHead();
                 break;
             case Gyaya.PLAYER_BIT | Gyaya.BRICK_BIT:
-                if (fixA.getUserData() == "head")
-                    ((InteractiveTileObject) fixB.getUserData()).onHeadHit();
-                else if (fixB.getUserData() == "head")
-                    ((InteractiveTileObject) fixA.getUserData()).onHeadHit();
-                break;
             case Gyaya.PLAYER_BIT | Gyaya.COIN_BIT:
                 if (fixA.getUserData() == "head")
                     ((InteractiveTileObject) fixB.getUserData()).onHeadHit();
                 else if (fixB.getUserData() == "head")
                     ((InteractiveTileObject) fixA.getUserData()).onHeadHit();
                 break;
+            case Gyaya.ENEMY_BIT | Gyaya.OBJECT_BIT:
+            case Gyaya.ENEMY_BIT | Gyaya.BRICK_BIT:
+            case Gyaya.ENEMY_BIT | Gyaya.COIN_BIT:
+                if (fixA.getFilterData().categoryBits == Gyaya.ENEMY_BIT)
+                    ((Enemy)fixA.getUserData()).reverseVelocity(true, false);
+                else
+                    ((Enemy)fixB.getUserData()).reverseVelocity(true, false);
+                break;
+            case Gyaya.PLAYER_BIT | Gyaya.ENEMY_BIT:
+                Gdx.app.log("Player", "died");
         }
 
     }

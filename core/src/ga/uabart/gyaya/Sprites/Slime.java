@@ -34,16 +34,26 @@ public class Slime extends Enemy {
     }
 
     public void update(float delta){
+        TextureRegion region = null;
         stateTime += delta;
         if (setToDestroy && !destroyed){
             world.destroyBody(b2body);
             destroyed = true;
-            setRegion(new TextureRegion(screen.getAtlas().findRegion(SLIME_NAME), 69, 0, 23, 23));
+            region = new TextureRegion(screen.getAtlas().findRegion(SLIME_NAME), 69, 0, 23, 23);
+            setRegion(region);
             stateTime = 0;
         }
         else if (!destroyed) {
+            b2body.setLinearVelocity(velocity);
             setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2 + 2 / Gyaya.PPM);
-            setRegion(walkAnimation.getKeyFrame(stateTime, true));
+            region = walkAnimation.getKeyFrame(stateTime, true);
+            setRegion(region);
+            if (b2body.getLinearVelocity().x < -0.1f && region.isFlipX()){
+                region.flip(true, false);
+            }
+            else if (b2body.getLinearVelocity().x > 0.1f && !region.isFlipX()){
+                region.flip(true, false);
+            }
         }
     }
 
@@ -67,7 +77,7 @@ public class Slime extends Enemy {
         fixtureDef.filter.maskBits = Gyaya.GROUND_BIT | Gyaya.BRICK_BIT | Gyaya.COIN_BIT |
                 Gyaya.ENEMY_BIT | Gyaya.OBJECT_BIT | Gyaya.PLAYER_BIT;
         fixtureDef.shape = shape;
-        b2body.createFixture(fixtureDef);
+        b2body.createFixture(fixtureDef).setUserData(this);
 
         PolygonShape head = new PolygonShape();
         Vector2[] vertice = new Vector2[4];
