@@ -9,14 +9,15 @@ import ga.uabart.gyaya.Screens.PlayScreen;
 public abstract class Enemy extends Sprite {
     protected World world;
     protected PlayScreen screen;
-    protected Body b2body;
+    public Body b2body;
     public Vector2 velocity;
     public Enemy(PlayScreen screen, float x, float y){
         this.world = screen.getWorld();
         this.screen = screen;
         setPosition(x, y);
         defineEnemy();
-        velocity = new Vector2(0.5f, 0);
+        velocity = new Vector2(-1, -2);
+        b2body.setActive(false);
     }
 
     protected abstract void defineEnemy();
@@ -29,4 +30,6 @@ public abstract class Enemy extends Sprite {
         if (y)
             velocity.y = -velocity.y;
     }
+
+    public abstract void update(float delta);
 }

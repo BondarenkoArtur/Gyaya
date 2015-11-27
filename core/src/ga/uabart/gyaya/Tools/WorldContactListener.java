@@ -36,8 +36,13 @@ public class WorldContactListener implements ContactListener {
                 else
                     ((Enemy)fixB.getUserData()).reverseVelocity(true, false);
                 break;
+            case Gyaya.ENEMY_BIT | Gyaya.ENEMY_BIT:
+                ((Enemy)fixA.getUserData()).reverseVelocity(true, false);
+                ((Enemy)fixB.getUserData()).reverseVelocity(true, false);
+                break;
             case Gyaya.PLAYER_BIT | Gyaya.ENEMY_BIT:
                 Gdx.app.log("Player", "died");
+                break;
         }
 
     }

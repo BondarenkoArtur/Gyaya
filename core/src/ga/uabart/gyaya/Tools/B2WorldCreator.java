@@ -8,12 +8,17 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Array;
 import ga.uabart.gyaya.Gyaya;
 import ga.uabart.gyaya.Screens.PlayScreen;
 import ga.uabart.gyaya.Sprites.Brick;
 import ga.uabart.gyaya.Sprites.Coin;
+import ga.uabart.gyaya.Sprites.Slime;
 
 public class B2WorldCreator {
+
+    private Array<Slime> slimes;
+
     public B2WorldCreator(PlayScreen screen){
         World world = screen.getWorld();
         TiledMap map = screen.getMap();
@@ -74,5 +79,17 @@ public class B2WorldCreator {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             new Coin(screen, rect);
         }
+
+        //create all slimes
+        slimes = new Array<Slime>();
+        for(MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            slimes.add(new Slime(screen, rect.getX() / Gyaya.PPM, rect.getY() / Gyaya.PPM));
+        }
     }
+
+    public Array<Slime> getSlimes() {
+        return slimes;
+    }
+
 }

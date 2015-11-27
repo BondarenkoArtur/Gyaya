@@ -17,6 +17,7 @@
     import com.badlogic.gdx.utils.viewport.Viewport;
     import ga.uabart.gyaya.Gyaya;
     import ga.uabart.gyaya.Scenes.Hud;
+    import ga.uabart.gyaya.Sprites.Enemy;
     import ga.uabart.gyaya.Sprites.Player;
     import ga.uabart.gyaya.Tools.B2WorldCreator;
     import ga.uabart.gyaya.Tools.WorldContactListener;
@@ -40,6 +41,7 @@
 
         private World world;
         private Box2DDebugRenderer b2dr;
+        private B2WorldCreator creator;
         private Player player;
 
         private boolean debugMode = false;
@@ -59,7 +61,7 @@
             world = new World(new Vector2(0, -10), true);
             b2dr = new Box2DDebugRenderer();
 
-            new B2WorldCreator(this);
+            creator = new B2WorldCreator(this);
 
             player = new Player(this);
 
@@ -118,6 +120,11 @@
             world.step(1/60f, 6, 2);
 
             player.update(delta);
+            for (Enemy enemy : creator.getSlimes()){
+                enemy.update(delta);
+                if (enemy.getX() < player.getX() + 160 / Gyaya.PPM)
+                    enemy.b2body.setActive(true);
+            }
             hud.update(delta);
 
             gameCamera.position.x = player.b2body.getPosition().x;
@@ -158,6 +165,8 @@
                 game.batch.setProjectionMatrix(gameCamera.combined);
                 game.batch.begin();
                 player.draw(game.batch);
+                for (Enemy enemy : creator.getSlimes())
+                    enemy.draw(game.batch);
                 game.batch.end();
 
                 game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
