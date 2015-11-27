@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="14" tilewidth="21" tileheight="21" nextobjectid="175">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="14" tilewidth="21" tileheight="21" nextobjectid="180">
  <tileset firstgid="1" name="sprites" tilewidth="21" tileheight="21" spacing="2" margin="2" tilecount="1936">
   <image source="sprites.png" width="1024" height="1024"/>
   <tile id="363">
@@ -69,6 +69,7 @@
   <object id="102" x="1806" y="189" width="63" height="10.5"/>
   <object id="103" x="1890" y="168" width="189" height="10.5"/>
   <object id="152" x="1110.38" y="168" width="110.25"/>
+  <object id="179" name="exit" x="1995" y="133.875" width="21" height="34.125"/>
  </objectgroup>
  <objectgroup name="pipes"/>
  <objectgroup name="coins">

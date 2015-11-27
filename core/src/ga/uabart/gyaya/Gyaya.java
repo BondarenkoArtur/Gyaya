@@ -25,8 +25,11 @@ public class Gyaya extends Game {
 	public static final short OBJECT_BIT = 32;
 	public static final short ENEMY_BIT = 64;
 	public static final short ENEMY_HEAD_BIT = 128;
+	public static final short EXIT_BIT = 256;
 
 	public static AssetManager manager;
+	public int level = 1;
+	public boolean changeLvl;
 
 	@Override
 	public void create () {
@@ -38,14 +41,15 @@ public class Gyaya extends Game {
 		manager.load("audio/sounds/uaBArt - Coin.mp3", Sound.class);
 		manager.load("audio/sounds/uaBArt - Miss.mp3", Sound.class);
 		manager.finishLoading();
-		playScreen = new PlayScreen(this);
+		playScreen = new PlayScreen(this, "level1");
 		setScreen(playScreen);
 	}
 
 	@Override
 	public void render () {
 		super.render();
-
+		if (changeLvl)
+			changeLevel();
 	}
 
 	@Override
@@ -53,5 +57,13 @@ public class Gyaya extends Game {
 		super.dispose();
 		manager.dispose();
 		batch.dispose();
+	}
+
+	public void changeLevel() {
+		changeLvl = false;
+		level++;
+		if (level > 3) level = 1;
+		playScreen = new PlayScreen(this, "level" + level);
+		setScreen(playScreen);
 	}
 }

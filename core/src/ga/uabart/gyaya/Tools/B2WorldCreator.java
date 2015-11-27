@@ -37,7 +37,18 @@ public class B2WorldCreator {
 
             shape.setAsBox((rect.getWidth()/2)/Gyaya.PPM,(rect.getHeight()/2)/Gyaya.PPM);
             fixtureDef.shape = shape;
-            body.createFixture(fixtureDef);
+            fixtureDef.filter.categoryBits = Gyaya.GROUND_BIT;
+
+            if (object.getName() != null && object.getName().equals("exit")){
+                fixtureDef.isSensor = true;
+                fixtureDef.filter.categoryBits = Gyaya.OBJECT_BIT;
+                body.createFixture(fixtureDef).setUserData("exit");
+                fixtureDef.isSensor = false;
+                fixtureDef.filter.categoryBits = Gyaya.GROUND_BIT;
+            }
+            else
+                body.createFixture(fixtureDef);
+
         }
 
         for(MapObject object : map.getLayers().get(2).getObjects().getByType(PolygonMapObject.class)){
@@ -86,6 +97,7 @@ public class B2WorldCreator {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             slimes.add(new Slime(screen, rect.getX() / Gyaya.PPM, rect.getY() / Gyaya.PPM));
         }
+
     }
 
     public Array<Slime> getSlimes() {

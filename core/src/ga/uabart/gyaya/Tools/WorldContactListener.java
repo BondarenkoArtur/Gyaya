@@ -7,6 +7,13 @@ import ga.uabart.gyaya.Sprites.Enemy;
 import ga.uabart.gyaya.Sprites.InteractiveTileObject;
 
 public class WorldContactListener implements ContactListener {
+
+    private Gyaya gyaya;
+
+    public WorldContactListener(Gyaya gyaya) {
+        this.gyaya = gyaya;
+    }
+
     @Override
     public void beginContact(Contact contact) {
         Fixture fixA = contact.getFixtureA();
@@ -28,7 +35,6 @@ public class WorldContactListener implements ContactListener {
                 else if (fixB.getUserData() == "head")
                     ((InteractiveTileObject) fixA.getUserData()).onHeadHit();
                 break;
-            case Gyaya.ENEMY_BIT | Gyaya.OBJECT_BIT:
             case Gyaya.ENEMY_BIT | Gyaya.BRICK_BIT:
             case Gyaya.ENEMY_BIT | Gyaya.COIN_BIT:
                 if (fixA.getFilterData().categoryBits == Gyaya.ENEMY_BIT)
@@ -42,6 +48,12 @@ public class WorldContactListener implements ContactListener {
                 break;
             case Gyaya.PLAYER_BIT | Gyaya.ENEMY_BIT:
                 Gdx.app.log("Player", "died");
+                break;
+            case Gyaya.PLAYER_BIT | Gyaya.OBJECT_BIT:
+                if (fixA.getUserData() == "exit" || fixB.getUserData() == "exit"){
+                    Gdx.app.log("Player", "exit");
+                    gyaya.changeLvl = true;
+                }
                 break;
         }
 

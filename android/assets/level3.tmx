@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="14" tilewidth="21" tileheight="21" nextobjectid="105">
+ <tileset firstgid="1" name="sprites" tilewidth="21" tileheight="21" spacing="2" margin="2" tilecount="1936">
+  <image source="sprites.png" width="1024" height="1024"/>
+  <tile id="363">
+   <animation>
+    <frame tileid="363" duration="300"/>
+    <frame tileid="364" duration="500"/>
+    <frame tileid="363" duration="300"/>
+    <frame tileid="362" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="450">
+   <animation>
+    <frame tileid="450" duration="100"/>
+    <frame tileid="494" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="451">
+   <animation>
+    <frame tileid="451" duration="100"/>
+    <frame tileid="495" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="452">
+   <animation>
+    <frame tileid="452" duration="100"/>
+    <frame tileid="496" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="453">
+   <animation>
+    <frame tileid="453" duration="100"/>
+    <frame tileid="497" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="457">
+   <animation>
+    <frame tileid="456" duration="200"/>
+    <frame tileid="457" duration="100"/>
+    <frame tileid="456" duration="50"/>
+    <frame tileid="457" duration="100"/>
+    <frame tileid="456" duration="50"/>
+    <frame tileid="457" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <layer name="background" width="100" height="14">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwSgYBaNgFIyCUUAsqGdhYGjAghtZBtpl1AVzmUnX006GHkrBamC4r8GC1w6j+LgIDNdLQHwZR/iuoiDcCxjJ14sLqAPDXgMJaw6DuOhBCmPk+JCkYvgVM1HPLGQQDAz/ECQcOgziYwtamp8H5bvSID2PAsoBzyimOQYAIJwZLw==
+  </data>
+ </layer>
+ <layer name="graphics" width="100" height="14">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALKwCYgNmEZaFeMAmRgwDIaJ4MBbILS0cC4iMMRJyKMdHXSgIN9ONikAlC47YPSyGxcYBMaPwYYF7EjLJ8MlrSGHhcg0AeMh34g7iUQH4PBD7B0O9Bu+Udh2sUWD5QC4UEQP9QElJRRMGBFANMTHKSzfeQCWLmODkDpC4gbYDTdHUZFkAf0wyEamn+DiYGBmZmBgZUZQrMwk24GJfn5KrR8YgLSYUAcAcSnBln50AV0UycQbwHiDiDeDMTtLBDxLjLK1+1AvBGJv5NE/U7AOHMGYhcgdgdiVybS3UAI6GHxFxvrwNdnlIDDWNwOiovHVDK/BEs8JAPtTMGCU9HcEg/ECVjM3A1UtwcPfjWE4mMzEG8hgEFxcZ9K9pVSkC+6gbiHSu4YrAAAnhA1+A==
+  </data>
+ </layer>
+ <objectgroup name="ground">
+  <object id="2" x="0" y="273" width="189" height="21"/>
+  <object id="4" x="189" y="273">
+   <polygon points="0,0 42,-42 42,21 0,21"/>
+  </object>
+  <object id="5" x="294" y="231" width="21" height="10.5"/>
+  <object id="8" x="0" y="0" height="294"/>
+  <object id="37" x="546" y="231" width="105" height="10.5"/>
+  <object id="38" x="593.25" y="241.5" width="10.5" height="52.5"/>
+  <object id="39" x="357" y="210" width="105" height="10.5"/>
+  <object id="49" x="693" y="252" width="147" height="21"/>
+  <object id="57" x="903" y="273">
+   <polygon points="0,0 21,-21 42,0 42,21 0,21"/>
+  </object>
+  <object id="66" x="1029" y="252" width="189" height="21"/>
+  <object id="71" x="1239" y="181.125" width="168" height="7.875"/>
+  <object id="79" x="1449" y="147" width="21" height="21"/>
+  <object id="80" x="1491" y="126" width="21" height="21"/>
+  <object id="81" x="1512" y="105" width="21" height="21"/>
+  <object id="82" x="1533" y="84" width="21" height="21"/>
+  <object id="83" x="1554" y="42" width="21" height="21"/>
+  <object id="84" x="1575" y="42">
+   <polygon points="0,0 84,84 84,89.25 21,89.25 21,63 13.125,63 0,49.875"/>
+  </object>
+  <object id="87" x="1890" y="217.875" width="168" height="13.125"/>
+  <object id="88" x="1932" y="210" width="84" height="7.875"/>
+  <object id="101" name="exit" x="1974" y="175.875" width="21" height="34.125"/>
+  <object id="104" x="1047.38" y="168" width="110.25"/>
+ </objectgroup>
+ <objectgroup name="pipes"/>
+ <objectgroup name="coins">
+  <object id="44" x="399" y="147" width="21" height="21"/>
+  <object id="59" x="882" y="105" width="21" height="21"/>
+  <object id="60" x="945" y="105" width="21" height="21"/>
+  <object id="61" x="882" y="168" width="21" height="21"/>
+  <object id="77" x="1281" y="105" width="21" height="21"/>
+  <object id="78" x="1344" y="105" width="21" height="21"/>
+ </objectgroup>
+ <objectgroup name="bricks">
+  <object id="45" x="441" y="147" width="21" height="21"/>
+  <object id="50" x="756" y="189" width="21" height="21"/>
+  <object id="51" x="777" y="189" width="21" height="21"/>
+  <object id="56" x="714" y="210" width="21" height="21"/>
+  <object id="62" x="882" y="189" width="21" height="21"/>
+  <object id="63" x="903" y="189" width="21" height="21"/>
+  <object id="64" x="924" y="189" width="21" height="21"/>
+  <object id="65" x="945" y="189" width="21" height="21"/>
+  <object id="67" x="1197" y="231" width="21" height="21"/>
+  <object id="69" x="777" y="126" width="21" height="21"/>
+  <object id="72" x="1260" y="105" width="21" height="21"/>
+  <object id="73" x="1302" y="105" width="21" height="21"/>
+  <object id="75" x="1323" y="105" width="21" height="21"/>
+  <object id="76" x="1365" y="105" width="21" height="21"/>
+  <object id="85" x="1722" y="84" width="21" height="21"/>
+  <object id="86" x="1806" y="126" width="21" height="21"/>
+  <object id="97" x="1890" y="147" width="21" height="21"/>
+ </objectgroup>
+ <objectgroup name="slimes">
+  <object id="90" x="441" y="126" width="21" height="21"/>
+  <object id="91" x="441" y="189" width="21" height="21"/>
+  <object id="92" x="630" y="210" width="21" height="21"/>
+  <object id="93" x="1197" y="210" width="21" height="21"/>
+  <object id="94" x="1386" y="147" width="21" height="21"/>
+  <object id="95" x="1554" y="21" width="21" height="21"/>
+ </objectgroup>
+</map>

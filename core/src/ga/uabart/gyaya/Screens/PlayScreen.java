@@ -44,9 +44,13 @@
         private B2WorldCreator creator;
         private Player player;
 
+        private String levelName;
+
+
         private boolean debugMode = false;
 
-        public PlayScreen(Gyaya gyaya){
+        public PlayScreen(Gyaya gyaya, String levelName){
+            this.levelName = levelName;
             atlas = new TextureAtlas("characters.atlas");
             background = new Texture("background1.png");
             this.game = gyaya;
@@ -54,7 +58,7 @@
             gameViewport = new FitViewport(Gyaya.V_WIDTH/Gyaya.PPM, Gyaya.V_HEIGHT/Gyaya.PPM, gameCamera);
 
             mapLoader = new TmxMapLoader();
-            map = mapLoader.load("level1.tmx");
+            map = mapLoader.load(this.levelName + ".tmx");
             renderer = new OrthogonalTiledMapRenderer(map, 1 / Gyaya.PPM);
 
             gameCamera.position.set(gameViewport.getWorldWidth()/2, gameViewport.getWorldHeight()/2, 0);
@@ -67,7 +71,7 @@
 
             hud = new Hud(gyaya.batch, player);
 
-            world.setContactListener(new WorldContactListener());
+            world.setContactListener(new WorldContactListener(gyaya));
 
             music = Gyaya.manager.get("audio/music/background.ogg", Music.class);
             music.setLooping(true);
@@ -122,7 +126,7 @@
             player.update(delta);
             for (Enemy enemy : creator.getSlimes()){
                 enemy.update(delta);
-                if (enemy.getX() < player.getX() + 160 / Gyaya.PPM)
+                if (enemy.getX() < player.getX() + 145 / Gyaya.PPM)
                     enemy.b2body.setActive(true);
             }
             hud.update(delta);
@@ -176,6 +180,10 @@
             else {
                 b2dr.render(world, gameCamera.combined);
             }
+        }
+
+        public String getLevelName() {
+            return levelName;
         }
 
         @Override

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="14" tilewidth="21" tileheight="21" nextobjectid="90">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="14" tilewidth="21" tileheight="21" nextobjectid="158">
  <tileset firstgid="1" name="sprites" tilewidth="21" tileheight="21" spacing="2" margin="2" tilecount="1936">
   <image source="sprites.png" width="1024" height="1024"/>
   <tile id="363">
@@ -47,66 +47,68 @@
  </tileset>
  <layer name="background" width="100" height="14">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwSgYBaNgFIyCUUAsqGdhYGjAghtZBtpl1AVzmUnX006GHkrBamC4r8GC1w6j+LgIDNdLQHwZR/iuoiDcCxjJ14sLqAPDXgMJaw6DuOhBCmPk+JCkYvgVM1HPLGQQDAz/ECQcOgziYwtamp8H5bvSID2PAsoBzyimOQYAIJwZLw==
+   eJztVkEOwCAIM9le4+P3P2/LDrssY3EI2gYOvRg0pS2GtpXSEglAHPt6Duj8K7lGKHog6GiRF6kP9lny8hHBdya9LlhnadSDt/u9HKU66dwjL1FmMyI0/7EmD2wZknTx+o+t32XyiInrbB9TC66eUXBrP7pnIPj1laOejM3aIRF2VStuz3otzz/3cqbj4QSHo0hm
   </data>
  </layer>
  <layer name="graphics" width="100" height="14">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjALKwCYgNmEZaFeMAmRgwDIaJ4MBbILS0cC4iMMRJyKMdHXSgIN9ONikAlC47YPSyGxcYBMaPwYYF7EjLJ8MlrSGHhcg0AeMh34g7iUQH4PBD7B0O9Bu+Udh2sUWD6MAFVBSRsGAFQFMT3CQzvaRC2DlOjoQZgTjBhhNd4dREeQB/XCIhubfYGJgYGZmYGBlhtAszKSbIUxBGXcVWj4xAekwII4A4lODoPxGBl1AN3UC8RYg7gDizUDczgIR7yKjfN0OxBuR+DtJ1O8EjDNnIHYBYncgdmUi3Q2EgB4Wf7GxDnx9Rgk4jMXtoLh4TCXzS7DEQzLQzhQsOBXNLfFAnIDFzN1AdXvw4FdDKD42A/EWAhgUF/epZF8pBfmiG4h7qOSOwQoA32I15A==
+   eJxjYKAfSKOjXSMVZDIyMGQwEqd2ND7oA6YQGSeptHfKiAaZ0DjoZyQ+TkYB7QEoPkbjZGBBJlK4w+JjuMXJTKA/9kHpmUPIT8jxMRBx0s4CwZtZUNnofBh7uIFMtLBGjw9K4mQfkeqwpdedSGG9iwWTT4p9rkwMB5yZGBxA2B3CPuAExEQ6b0ABtvgYqLJrOzDcd7Dg5pMKCpmwix8Din8iQ06NmaFBFYhVgJh8VyEAet4AAVzxMRBx0snCcACEcfHxgWNY3FmMI1xR9OEJf2SQBzQ/CBgPgUAcQEZ8EFt24IsPUuKEmHrTHJjWk7DgZCLzQC9QXT8LhO6D0shi6KCUiHAmBA4DzTiCBR+l0GxseQMECMXHUG53EZM/BhsgJj6Q4+QoCfFiCkyzcUBsMkDtohIS4wM9f5PaTk5mJA5PwmMusfEBi5MJaGYZAMPaEIhjobQhNA4MkXD8AMUHNcorUgAAgsl3YA==
   </data>
  </layer>
  <objectgroup name="ground">
-  <object id="2" x="0" y="273" width="189" height="21"/>
-  <object id="4" x="189" y="273">
-   <polygon points="0,0 42,-42 42,21 0,21"/>
+  <object id="104" x="0" y="0" height="294"/>
+  <object id="105" x="0" y="273" width="231" height="21"/>
+  <object id="106" x="231" y="231" width="21" height="10.5"/>
+  <object id="107" x="252" y="189" width="21" height="10.5"/>
+  <object id="110" x="273" y="147" width="21" height="10.5"/>
+  <object id="111" x="294" y="105" width="21" height="10.5"/>
+  <object id="112" x="315" y="63" width="21" height="10.5"/>
+  <object id="113" x="336" y="21" width="21" height="10.5"/>
+  <object id="114" x="357" y="21">
+   <polygon points="0,0 252,252 252,273 0,273"/>
   </object>
-  <object id="5" x="294" y="231" width="21" height="10.5"/>
-  <object id="8" x="0" y="0" height="294"/>
-  <object id="37" x="546" y="231" width="105" height="10.5"/>
-  <object id="38" x="593.25" y="241.5" width="10.5" height="52.5"/>
-  <object id="39" x="357" y="210" width="105" height="10.5"/>
-  <object id="49" x="693" y="252" width="147" height="21"/>
-  <object id="57" x="903" y="273">
-   <polygon points="0,0 21,-21 42,0 42,21 0,21"/>
+  <object id="117" x="574.875" y="0">
+   <polygon points="0,0 0,47.25 -2.625,47.25 -7.875,63 13.125,63 7.875,47.25 5.25,47.25 5.25,0"/>
   </object>
-  <object id="66" x="1029" y="252" width="189" height="21"/>
-  <object id="71" x="1239" y="181.125" width="168" height="7.875"/>
-  <object id="79" x="1449" y="147" width="21" height="21"/>
-  <object id="80" x="1491" y="126" width="21" height="21"/>
-  <object id="81" x="1512" y="105" width="21" height="21"/>
-  <object id="82" x="1533" y="84" width="21" height="21"/>
-  <object id="83" x="1554" y="42" width="21" height="21"/>
-  <object id="84" x="1575" y="42">
-   <polygon points="0,0 84,84 84,89.25 21,89.25 21,63 13.125,63 0,49.875"/>
+  <object id="122" name="exit" x="1932" y="189" width="21" height="21"/>
+  <object id="124" x="693" y="273">
+   <polygon points="147,0 168,-21 189,-21 210,0"/>
   </object>
-  <object id="87" x="1890" y="217.875" width="168" height="13.125"/>
-  <object id="88" x="1932" y="210" width="84" height="7.875"/>
+  <object id="125" x="924" y="210" width="147" height="10.5"/>
+  <object id="126" x="1092" y="189" width="42" height="13.125"/>
+  <object id="127" x="1176" y="189" width="42" height="13.125"/>
+  <object id="128" x="1260" y="210" width="168" height="5.25"/>
+  <object id="129" x="1470" y="157.5" width="126" height="10.5"/>
+  <object id="131" x="1517.25" y="168" width="10.5" height="123.375"/>
+  <object id="132" x="1638" y="168" width="42" height="21"/>
+  <object id="133" x="1701" y="189" width="42" height="21"/>
+  <object id="134" x="1785" y="168" width="42" height="21"/>
+  <object id="136" x="1869" y="210" width="147" height="21"/>
+  <object id="155" x="609" y="273" width="21" height="21"/>
+  <object id="156" x="693" y="273" width="210" height="21"/>
+  <object id="157" x="1029" y="126" width="252" height="21"/>
  </objectgroup>
  <objectgroup name="pipes"/>
  <objectgroup name="coins">
-  <object id="44" x="399" y="147" width="21" height="21"/>
-  <object id="59" x="882" y="105" width="21" height="21"/>
-  <object id="60" x="945" y="105" width="21" height="21"/>
-  <object id="61" x="882" y="168" width="21" height="21"/>
-  <object id="77" x="1281" y="105" width="21" height="21"/>
-  <object id="78" x="1344" y="105" width="21" height="21"/>
+  <object id="145" x="1512" y="105" width="21" height="21"/>
+  <object id="146" x="1344" y="147" width="21" height="21"/>
+  <object id="147" x="756" y="147" width="21" height="21"/>
+  <object id="148" x="147" y="210" width="21" height="21"/>
  </objectgroup>
  <objectgroup name="bricks">
-  <object id="45" x="441" y="147" width="21" height="21"/>
-  <object id="50" x="756" y="189" width="21" height="21"/>
-  <object id="51" x="777" y="189" width="21" height="21"/>
-  <object id="56" x="714" y="210" width="21" height="21"/>
-  <object id="62" x="882" y="189" width="21" height="21"/>
-  <object id="63" x="903" y="189" width="21" height="21"/>
-  <object id="64" x="924" y="189" width="21" height="21"/>
-  <object id="65" x="945" y="189" width="21" height="21"/>
-  <object id="67" x="1197" y="231" width="21" height="21"/>
-  <object id="69" x="777" y="126" width="21" height="21"/>
-  <object id="72" x="1260" y="105" width="21" height="21"/>
-  <object id="73" x="1302" y="105" width="21" height="21"/>
-  <object id="75" x="1323" y="105" width="21" height="21"/>
-  <object id="76" x="1365" y="105" width="21" height="21"/>
-  <object id="85" x="1722" y="84" width="21" height="21"/>
-  <object id="86" x="1806" y="126" width="21" height="21"/>
+  <object id="137" x="735" y="210" width="21" height="21"/>
+  <object id="138" x="756" y="210" width="21" height="21"/>
+  <object id="139" x="966" y="147" width="21" height="21"/>
+  <object id="140" x="1491" y="105" width="21" height="21"/>
+  <object id="141" x="1533" y="105" width="21" height="21"/>
+  <object id="142" x="1554" y="105" width="21" height="21"/>
+  <object id="143" x="1764" y="252" width="21" height="21"/>
+  <object id="144" x="1848" y="252" width="21" height="21"/>
+ </objectgroup>
+ <objectgroup name="slimes">
+  <object id="119" x="861" y="231" width="21" height="21"/>
+  <object id="120" x="1050" y="189" width="21" height="21"/>
+  <object id="121" x="1407" y="189" width="21" height="21"/>
+  <object id="149" x="1995" y="189" width="21" height="21"/>
  </objectgroup>
 </map>
