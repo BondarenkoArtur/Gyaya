@@ -5,9 +5,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import ga.uabart.gyaya.Screens.PlayScreen;
 
-/**
- * Created by Arthur on 11/27/2015.
- */
 public abstract class Enemy extends Sprite {
     protected World world;
     protected PlayScreen screen;
@@ -20,4 +17,6 @@ public abstract class Enemy extends Sprite {
     }
 
     protected abstract void defineEnemy();
+
+    public abstract void hitOnHead();
 }

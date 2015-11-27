@@ -11,28 +11,38 @@ import com.badlogic.gdx.utils.Array;
 import ga.uabart.gyaya.Gyaya;
 import ga.uabart.gyaya.Screens.PlayScreen;
 
-/**
- * Created by Arthur on 11/27/2015.
- */
 public class Slime extends Enemy {
+    public static final String SLIME_NAME = "SlimePink";
     private  float stateTime;
     private Animation walkAnimation;
     private Array<TextureRegion> frames;
+    private boolean setToDestroy;
+    private boolean destroyed;
+
     public Slime(PlayScreen screen, float x, float y) {
         super(screen, x, y);
         frames = new Array<TextureRegion>();
         for (int i = 0; i < 3 ; i++) {
-            frames.add(new TextureRegion(screen.getAtlas().findRegion("SlimePink"), i*23, 0, 23, 23 ));
+            frames.add(new TextureRegion(screen.getAtlas().findRegion(SLIME_NAME), i*23, 0, 23, 23 ));
             walkAnimation = new Animation(0.2f, frames);
             stateTime = 0;
             setBounds(getX(), getY(), 16 / Gyaya.PPM, 16 / Gyaya.PPM);
         }
+        setToDestroy = false;
+        destroyed = false;
     }
 
     public void update(float delta){
         stateTime += delta;
-        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2 + 2 / Gyaya.PPM);
-        setRegion(walkAnimation.getKeyFrame(stateTime, true));
+        if (setToDestroy && !destroyed){
+            world.destroyBody(b2body);
+            destroyed = true;
+            setRegion(new TextureRegion(screen.getAtlas().findRegion(SLIME_NAME), 69, 0, 23, 23));
+        }
+        else if (!destroyed) {
+            setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2 + 2 / Gyaya.PPM);
+            setRegion(walkAnimation.getKeyFrame(stateTime, true));
+        }
     }
 
     @Override
@@ -53,14 +63,19 @@ public class Slime extends Enemy {
 
         PolygonShape head = new PolygonShape();
         Vector2[] vertice = new Vector2[4];
-        vertice[0] = new Vector2(-3.5f, 4.5f).scl(1 / Gyaya.PPM);
-        vertice[1] = new Vector2(3.5f, 4.5f).scl(1 / Gyaya.PPM);
-        vertice[2] = new Vector2(-2f, 2f).scl(1 / Gyaya.PPM);
-        vertice[3] = new Vector2(2f, 2f).scl(1 / Gyaya.PPM);
+        vertice[0] = new Vector2(-1f, 4.5f).scl(1 / Gyaya.PPM);
+        vertice[1] = new Vector2(1f, 4.5f).scl(1 / Gyaya.PPM);
+        vertice[2] = new Vector2(-1f, 2f).scl(1 / Gyaya.PPM);
+        vertice[3] = new Vector2(1f, 2f).scl(1 / Gyaya.PPM);
         head.set(vertice);
         fixtureDef.shape = head;
         fixtureDef.restitution = 0.5f;
         fixtureDef.filter.categoryBits = Gyaya.ENEMY_HEAD_BIT;
         b2body.createFixture(fixtureDef).setUserData(this);
+    }
+
+    @Override
+    public void hitOnHead() {
+        setToDestroy = true;
     }
 }
