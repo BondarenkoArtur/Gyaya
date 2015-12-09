@@ -17,6 +17,7 @@ public class Gyaya extends Game {
 
 	public static final float PPM = 100;
 
+	public static final short NOTHING_BIT = 0;
 	public static final short GROUND_BIT = 1;
 	public static final short PLAYER_BIT = 2;
 	public static final short BRICK_BIT = 4;
@@ -25,7 +26,6 @@ public class Gyaya extends Game {
 	public static final short OBJECT_BIT = 32;
 	public static final short ENEMY_BIT = 64;
 	public static final short ENEMY_HEAD_BIT = 128;
-	public static final short EXIT_BIT = 256;
 
 	public static AssetManager manager;
 	public int level = 1;
@@ -40,7 +40,8 @@ public class Gyaya extends Game {
 		manager.load("audio/music/background.ogg", Music.class);
 		manager.load("audio/sounds/uaBArt - Coin.mp3", Sound.class);
 		manager.load("audio/sounds/uaBArt - Miss.mp3", Sound.class);
-		manager.finishLoading();
+        manager.load("audio/sounds/uaBArt - Bell.mp3", Sound.class);
+        manager.finishLoading();
 		playScreen = new PlayScreen(this, "level1");
 		setScreen(playScreen);
 	}

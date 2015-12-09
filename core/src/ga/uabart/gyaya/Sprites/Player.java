@@ -1,5 +1,7 @@
 package ga.uabart.gyaya.Sprites;
 
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -14,17 +16,20 @@ public class Player extends Sprite {
 
     private static final Array<String> CHARS = new Array<String>(new String[]{"CharCyan", "CharBlue", "CharPink", "CharYellow", "CharWhite"});
 
-    public enum State { FALLING, JUMPING, STANDING, RUNNING };
+    public enum State { FALLING, JUMPING, STANDING, RUNNING, DEAD };
     public State currentState;
     public State previousState;
     public World world;
     public Body b2body;
     private TextureRegion playerStand;
+    private TextureRegion playerDead;
     private Animation playerRun;
     private Animation playerJump;
     private Animation playerFalling;
     private boolean runningRight;
     private float stateTimer;
+    private boolean playerIsDead;
+    public boolean ableToJump;
 
     private String charName;
     private String charNameFace;
@@ -59,6 +64,7 @@ public class Player extends Sprite {
 
         definePlayer();
         playerStand = new TextureRegion(screen.getAtlas().findRegion(charName), 0, 0, 23, 23);
+        playerDead = new TextureRegion(screen.getAtlas().findRegion(charName), 4 * 23, 0, 23, 23);
         setBounds(0, 0, 23 / Gyaya.PPM, 23 / Gyaya.PPM);
         setRegion(playerStand);
     }
@@ -72,18 +78,26 @@ public class Player extends Sprite {
         currentState = getState();
         TextureRegion region;
         switch (currentState){
+            case DEAD:
+                region = playerDead;
+                ableToJump = false;
+                break;
             case JUMPING:
                 region = playerJump.getKeyFrame(stateTimer);
+                ableToJump = false;
                 break;
             case RUNNING:
                 region = playerRun.getKeyFrame(stateTimer, true);
+                ableToJump = true;
                 break;
             case FALLING:
                 region = playerFalling.getKeyFrame(stateTimer, true);
+                ableToJump = false;
                 break;
             case STANDING:
             default:
                 region = playerStand;
+                ableToJump = true;
                 break;
         }
 
@@ -104,6 +118,24 @@ public class Player extends Sprite {
 
     }
 
+    public void hit(){
+        Gyaya.manager.get("audio/music/background.ogg", Music.class).stop();
+        Gyaya.manager.get("audio/sounds/uaBArt - Bell.mp3", Sound.class).play();
+        playerIsDead = true;
+        Filter filter = new Filter();
+        filter.maskBits = Gyaya.NOTHING_BIT;
+        for (Fixture fixture : b2body.getFixtureList())
+            fixture.setFilterData(filter);
+        b2body.setLinearVelocity(new Vector2(0, 4f));
+    }
+
+    public boolean isDead(){
+        return playerIsDead;
+    }
+
+    public float getStateTimer(){
+        return stateTimer;
+    }
 
     public TextureRegion getFaceTexture() {
         return faceTexture;
@@ -111,10 +143,12 @@ public class Player extends Sprite {
 
 
     public State getState() {
-        if (b2body.getLinearVelocity().y > 0)
+        if (playerIsDead)
+            return State.DEAD;
+        else if (b2body.getLinearVelocity().y > 0.1)
 //                || b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING)
             return State.JUMPING;
-        else if (b2body.getLinearVelocity().y < 0)
+        else if (b2body.getLinearVelocity().y < -0.1)
             return State.FALLING;
         else if (b2body.getLinearVelocity().x != 0)
             return State.RUNNING;

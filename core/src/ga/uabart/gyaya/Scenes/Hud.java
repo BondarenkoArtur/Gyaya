@@ -31,6 +31,7 @@ public class Hud implements Disposable{
     Label levelLabel;
     Label worldLabel;
     Label playerLabel;
+    Label debugLabel;
 
     private SpriteBatch spriteBatch;
     private TextureRegion face;
@@ -56,6 +57,8 @@ public class Hud implements Disposable{
         levelLabel = new Label("1-1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         worldLabel = new Label("World", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         playerLabel = new Label("Player", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        debugLabel = new Label("", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
 
         table.add(playerLabel).expandX().padTop(10);
         table.add(worldLabel).expandX().padTop(10);
@@ -64,6 +67,8 @@ public class Hud implements Disposable{
         table.add(scoreLabel).expandX();
         table.add(levelLabel).expandX();
         table.add(countdownLabel).expandX();
+        table.row();
+        table.add(debugLabel).padTop(10);
 
         stage.addActor(table);
     }
@@ -87,6 +92,10 @@ public class Hud implements Disposable{
     public static void addScore(int value) {
         score += value;
         scoreLabel.setText(String.format("%06d", score));
+    }
+
+    public void setDebugText(String string) {
+        debugLabel.setText(string);
     }
 
     @Override

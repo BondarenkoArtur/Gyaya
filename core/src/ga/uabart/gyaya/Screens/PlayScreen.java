@@ -90,6 +90,14 @@
             return world;
         }
 
+        public boolean gameOver(){
+            if (player.currentState == Player.State.DEAD &&
+                    player.getStateTimer() > 3){
+                return true;
+            }
+            return false;
+        }
+
         @Override
         public void show() {
 
@@ -108,16 +116,18 @@
         }
 
         public void handleInput(float delta){
-            if (Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.justTouched())
-                player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
-            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2)
-                player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
-            if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2)
-                player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
-            if ((Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.getAccelerometerY() > 1) && player.b2body.getLinearVelocity().x <= 2)
-                player.b2body.applyLinearImpulse(new Vector2(Gdx.input.getAccelerometerY() / 50, 0), player.b2body.getWorldCenter(), true);
-            if ((Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.getAccelerometerY() < -1) && player.b2body.getLinearVelocity().x >= -2)
-                player.b2body.applyLinearImpulse(new Vector2(Gdx.input.getAccelerometerY() / 50, 0), player.b2body.getWorldCenter(), true);
+            if (player.currentState != Player.State.DEAD) {
+                if (player.ableToJump && Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.justTouched())
+                    player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
+                if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2)
+                    player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
+                if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2)
+                    player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
+                if ((Gdx.input.getAccelerometerY() > 1) && player.b2body.getLinearVelocity().x <= 2)
+                    player.b2body.applyLinearImpulse(new Vector2(Gdx.input.getAccelerometerY() / 50, 0), player.b2body.getWorldCenter(), true);
+                if ((Gdx.input.getAccelerometerY() < -1) && player.b2body.getLinearVelocity().x >= -2)
+                    player.b2body.applyLinearImpulse(new Vector2(Gdx.input.getAccelerometerY() / 50, 0), player.b2body.getWorldCenter(), true);
+            }
             if (Gdx.input.isKeyJustPressed(Input.Keys.D))
                 debugMode = !debugMode;
         }
@@ -133,10 +143,20 @@
                 if (enemy.getX() < player.getX() + 145 / Gyaya.PPM)
                     enemy.b2body.setActive(true);
             }
+
+            if (player.b2body.getPosition().y < 0 && player.currentState != Player.State.DEAD)
+                player.hit();
+
+//            if (debugMode)
+//                hud.setDebugText("x= " + player.b2body.getPosition().x +
+//                                " y= " + player.b2body.getPosition().y);
+
             hud.update(delta);
 
-            gameCamera.position.x = player.b2body.getPosition().x;
-            gameCamera.position.y = player.b2body.getPosition().y;
+            if (player.currentState != Player.State.DEAD) {
+                gameCamera.position.x = player.b2body.getPosition().x;
+                gameCamera.position.y = player.b2body.getPosition().y;
+            }
 
             if (gameCamera.position.x < 1.2f)
                 gameCamera.position.x = 1.2f;
@@ -183,6 +203,10 @@
             }
             else {
                 b2dr.render(world, gameCamera.combined);
+            }
+            if (gameOver()){
+                game.setScreen(new GameOverScreen(game));
+                dispose();
             }
         }
 
