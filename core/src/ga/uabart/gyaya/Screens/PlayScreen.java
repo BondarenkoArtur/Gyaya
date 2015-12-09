@@ -117,7 +117,7 @@
 
         public void handleInput(float delta){
             if (player.currentState != Player.State.DEAD) {
-                if (player.ableToJump && Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.justTouched())
+                if (player.ableToJump && (Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.justTouched()))
                     player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
                 if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2)
                     player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
