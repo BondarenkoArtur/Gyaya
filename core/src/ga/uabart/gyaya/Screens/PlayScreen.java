@@ -205,7 +205,7 @@
                 b2dr.render(world, gameCamera.combined);
             }
             if (gameOver()){
-                game.setScreen(new GameOverScreen(game));
+                game.setScreen(new GameOverScreen(game, levelName));
                 dispose();
             }
         }

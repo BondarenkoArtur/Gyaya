@@ -20,10 +20,12 @@ public class GameOverScreen implements Screen {
 
     private Viewport viewport;
     private Stage stage;
+    private String levelName;
 
     private Gyaya gyaya;
 
-    public GameOverScreen(Gyaya gyaya){
+    public GameOverScreen(Gyaya gyaya, String levelName){
+        this.levelName = levelName;
         this.gyaya = gyaya;
         viewport = new FitViewport(Gyaya.V_WIDTH, Gyaya.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, gyaya.batch);
@@ -51,7 +53,7 @@ public class GameOverScreen implements Screen {
     @Override
     public void render(float delta) {
         if (Gdx.input.justTouched()){
-            gyaya.setScreen(new PlayScreen(gyaya, "level1"));
+            gyaya.setScreen(new PlayScreen(gyaya, levelName));
             dispose();
         }
         Gdx.gl.glClearColor(0, 0, 0, 1);
