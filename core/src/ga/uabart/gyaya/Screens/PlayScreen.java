@@ -1,7 +1,6 @@
     package ga.uabart.gyaya.Screens;
 
     import com.badlogic.gdx.Gdx;
-    import com.badlogic.gdx.Input;
     import com.badlogic.gdx.Screen;
     import com.badlogic.gdx.audio.Music;
     import com.badlogic.gdx.graphics.GL20;
@@ -20,10 +19,12 @@
     import ga.uabart.gyaya.Sprites.Enemy;
     import ga.uabart.gyaya.Sprites.Player;
     import ga.uabart.gyaya.Tools.B2WorldCreator;
+    import ga.uabart.gyaya.Tools.Controller;
     import ga.uabart.gyaya.Tools.WorldContactListener;
 
     public class PlayScreen implements Screen {
 
+        private Controller controller;
         private Gyaya game;
         private TextureAtlas atlas;
 
@@ -46,9 +47,6 @@
 
         private String levelName;
 
-
-        private boolean debugMode = false;
-
         public PlayScreen(Gyaya gyaya, String levelName){
             this.levelName = levelName;
             atlas = new TextureAtlas("characters.atlas");
@@ -70,6 +68,7 @@
             player = new Player(this);
 
             hud = new Hud(gyaya.batch, player);
+            controller = new Controller(player, hud);
 
             world.setContactListener(new WorldContactListener(gyaya));
 
@@ -100,7 +99,7 @@
 
         @Override
         public void show() {
-
+            Gdx.input.setInputProcessor(hud.stage);
         }
 
         public void jump(){
@@ -115,25 +114,8 @@
             player.b2body.applyLinearImpulse(new Vector2(1f, 0), player.b2body.getWorldCenter(), true);
         }
 
-        public void handleInput(float delta){
-            if (player.currentState != Player.State.DEAD) {
-                if (player.ableToJump && (Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.justTouched()))
-                    player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
-                if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2)
-                    player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
-                if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2)
-                    player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
-                if ((Gdx.input.getAccelerometerY() > 1) && player.b2body.getLinearVelocity().x <= 2)
-                    player.b2body.applyLinearImpulse(new Vector2(Gdx.input.getAccelerometerY() / 50, 0), player.b2body.getWorldCenter(), true);
-                if ((Gdx.input.getAccelerometerY() < -1) && player.b2body.getLinearVelocity().x >= -2)
-                    player.b2body.applyLinearImpulse(new Vector2(Gdx.input.getAccelerometerY() / 50, 0), player.b2body.getWorldCenter(), true);
-            }
-            if (Gdx.input.isKeyJustPressed(Input.Keys.D))
-                debugMode = !debugMode;
-        }
-
         public void update(float delta){
-            handleInput(delta);
+            controller.handleInput(delta);
 
             world.step(1/60f, 6, 2);
 
@@ -182,7 +164,7 @@
             Gdx.gl.glClearColor(0, 0, 0, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-            if (!debugMode){
+            if (!Gyaya.isDebugMode()){
                 game.batch.begin();
                 game.batch.draw(background, 0, 0, 480, 320);
                 game.batch.end();
@@ -231,7 +213,7 @@
 
         @Override
         public void hide() {
-
+            Gdx.input.setInputProcessor(null);
         }
 
         @Override

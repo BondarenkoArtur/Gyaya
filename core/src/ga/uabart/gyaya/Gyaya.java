@@ -30,8 +30,18 @@ public class Gyaya extends Game {
 	public static AssetManager manager;
 	public int level = 1;
 	public boolean changeLvl;
+    private static boolean debugMode = false;
+    private static boolean drawControls = false;
+    public static String debugString = "";
 
-	@Override
+    public Gyaya(boolean drawControls) {
+        setDrawControls(drawControls);
+    }
+
+    public Gyaya() {
+    }
+
+    @Override
 	public void create () {
 //        Irc irc = new Irc(this);
 //        irc.init();
@@ -67,4 +77,29 @@ public class Gyaya extends Game {
 		playScreen = new PlayScreen(this, "level" + level);
 		setScreen(playScreen);
 	}
+
+    public static boolean isDebugMode() {
+        return debugMode;
+    }
+
+    public static void setDebugMode(boolean debugMode) {
+        Gyaya.debugMode = debugMode;
+    }
+
+    public static void switchDebug() {
+        setDebugMode(!debugMode);
+    }
+
+    public static boolean isDrawControls() {
+        return drawControls;
+    }
+
+    public static void setDrawControls(boolean drawControls) {
+        Gyaya.drawControls = drawControls;
+    }
+
+    public static void switchDrawControls() {
+        setDrawControls(!drawControls);
+    }
+
 }

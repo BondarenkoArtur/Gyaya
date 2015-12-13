@@ -80,6 +80,7 @@ public class Hud implements Disposable{
             countdownLabel.setText(String.format("%03d", worldTimer));
             timeCount = 0;
         }
+        debugLabel.setText(Gyaya.debugString);
     }
 
     public void render(float delta){
