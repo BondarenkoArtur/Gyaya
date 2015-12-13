@@ -5,13 +5,21 @@ import com.badlogic.gdx.physics.box2d.*;
 import ga.uabart.gyaya.Gyaya;
 import ga.uabart.gyaya.Sprites.Enemy;
 import ga.uabart.gyaya.Sprites.InteractiveTileObject;
+import ga.uabart.gyaya.Sprites.Player;
 
 public class WorldContactListener implements ContactListener {
+
+    private int numFootContacts;
 
     private Gyaya gyaya;
 
     public WorldContactListener(Gyaya gyaya) {
         this.gyaya = gyaya;
+        numFootContacts = 0;
+    }
+
+    public int getNumFootContacts() {
+        return numFootContacts;
     }
 
     @Override
@@ -34,6 +42,11 @@ public class WorldContactListener implements ContactListener {
                     ((InteractiveTileObject) fixB.getUserData()).onHeadHit();
                 else if (fixB.getUserData() == "head")
                     ((InteractiveTileObject) fixA.getUserData()).onHeadHit();
+            case Gyaya.PLAYER_BIT | Gyaya.GROUND_BIT:
+                if (fixA.getUserData() == "feet")
+                    numFootContacts++;
+                else if (fixB.getUserData() == "feet")
+                    numFootContacts++;
                 break;
             case Gyaya.ENEMY_BIT | Gyaya.BRICK_BIT:
             case Gyaya.ENEMY_BIT | Gyaya.COIN_BIT:
@@ -55,13 +68,28 @@ public class WorldContactListener implements ContactListener {
                     gyaya.changeLvl = true;
                 }
                 break;
+
         }
 
     }
 
     @Override
     public void endContact(Contact contact) {
+        Fixture fixA = contact.getFixtureA();
+        Fixture fixB = contact.getFixtureB();
 
+        int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
+
+        switch (cDef) {
+            case Gyaya.PLAYER_BIT | Gyaya.BRICK_BIT:
+            case Gyaya.PLAYER_BIT | Gyaya.COIN_BIT:
+            case Gyaya.PLAYER_BIT | Gyaya.GROUND_BIT:
+                if (fixA.getUserData() == "feet")
+                    numFootContacts--;
+                else if (fixB.getUserData() == "feet")
+                    numFootContacts--;
+                break;
+        }
     }
 
     @Override

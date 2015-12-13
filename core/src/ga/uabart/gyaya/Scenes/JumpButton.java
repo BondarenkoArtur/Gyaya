@@ -43,7 +43,10 @@ public class JumpButton extends Actor {
     }
 
     public boolean isPressed() {
-        return isPressed;
+        if (isPressed){
+            isPressed = false;
+            return true;
+        } else return false;
     }
 
     @Override

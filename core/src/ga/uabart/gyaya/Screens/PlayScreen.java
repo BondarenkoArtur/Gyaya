@@ -40,6 +40,7 @@
 
         private Music music;
 
+        private WorldContactListener wcListener;
         private World world;
         private Box2DDebugRenderer b2dr;
         private B2WorldCreator creator;
@@ -70,7 +71,8 @@
             hud = new Hud(gyaya.batch, player);
             controller = new Controller(player, hud);
 
-            world.setContactListener(new WorldContactListener(gyaya));
+            wcListener = new WorldContactListener(gyaya);
+            world.setContactListener(wcListener);
 
             music = Gyaya.manager.get("audio/music/background.ogg", Music.class);
             music.setLooping(true);
@@ -128,6 +130,10 @@
 
             if (player.b2body.getPosition().y < 0 && player.currentState != Player.State.DEAD)
                 player.hit();
+
+            if (wcListener.getNumFootContacts() > 0)
+                player.setAbleToJump(true);
+            else player.setAbleToJump(false);
 
 //            if (debugMode)
 //                hud.setDebugText("x= " + player.b2body.getPosition().x +

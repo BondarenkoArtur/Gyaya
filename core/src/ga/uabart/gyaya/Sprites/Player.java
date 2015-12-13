@@ -80,24 +80,19 @@ public class Player extends Sprite {
         switch (currentState){
             case DEAD:
                 region = playerDead;
-                ableToJump = false;
                 break;
             case JUMPING:
                 region = playerJump.getKeyFrame(stateTimer);
-                ableToJump = false;
                 break;
             case RUNNING:
                 region = playerRun.getKeyFrame(stateTimer, true);
-                ableToJump = true;
                 break;
             case FALLING:
                 region = playerFalling.getKeyFrame(stateTimer, true);
-                ableToJump = false;
                 break;
             case STANDING:
             default:
                 region = playerStand;
-                ableToJump = true;
                 break;
         }
 
@@ -181,7 +176,15 @@ public class Player extends Sprite {
         fixtureDef.shape = head;
         fixtureDef.isSensor = true;
         b2body.createFixture(fixtureDef).setUserData("head");
+
+        EdgeShape feet = new EdgeShape();
+        feet.set(new Vector2(-6 / Gyaya.PPM, -9f / Gyaya.PPM), new Vector2(6 / Gyaya.PPM, -9f / Gyaya.PPM));
+        fixtureDef.shape = feet;
+        fixtureDef.isSensor = true;
+        b2body.createFixture(fixtureDef).setUserData("feet");
     }
 
-
+    public void setAbleToJump(boolean ableToJump) {
+        this.ableToJump = ableToJump;
+    }
 }
