@@ -23,9 +23,9 @@ public class Player extends Sprite {
     public Body b2body;
     private TextureRegion playerStand;
     private TextureRegion playerDead;
-    private Animation playerRun;
-    private Animation playerJump;
-    private Animation playerFalling;
+    private Animation<TextureRegion> playerRun;
+    private Animation<TextureRegion> playerJump;
+    private Animation<TextureRegion> playerFalling;
     private boolean runningRight;
     private float stateTimer;
     private boolean playerIsDead;

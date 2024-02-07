@@ -1,15 +1,16 @@
 package ga.uabart.gyaya.desktop;
 
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import ga.uabart.gyaya.Gyaya;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = 480*2;
-		config.height = 320*2;
-		config.title = "Gyaya";
-		new LwjglApplication(new Gyaya(), config);
+		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+		//config.setWidth(480*2);
+		//config.setHeight(320*2);
+		config.setForegroundFPS(60);
+		config.setTitle("Gyaya");
+		new Lwjgl3Application(new Gyaya(), config);
 	}
 }

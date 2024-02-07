@@ -21,6 +21,7 @@ www-test/
 android/libs/armeabi/
 android/libs/armeabi-v7a/
 android/libs/x86/
+android/libs/
 android/gen/
 .idea/
 *.ipr

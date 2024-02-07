@@ -15,7 +15,7 @@ import ga.uabart.gyaya.Screens.PlayScreen;
 public class Slime extends Enemy {
     public static final String SLIME_NAME = "SlimePink";
     private  float stateTime;
-    private Animation walkAnimation;
+    private Animation<TextureRegion> walkAnimation;
     private Array<TextureRegion> frames;
     private boolean setToDestroy;
     private boolean destroyed;
